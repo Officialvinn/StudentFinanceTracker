@@ -1,0 +1,122 @@
+[
+  {
+    "id": "rec_0001",
+    "type": "income",
+    "description": "Monthly salary from part-time job",
+    "amount": 450.00,
+    "category": "Salary",
+    "date": "2026-02-01",
+    "createdAt": "2026-02-01T08:00:00.000Z",
+    "updatedAt": "2026-02-01T08:00:00.000Z"
+  },
+  {
+    "id": "rec_0002",
+    "type": "expense",
+    "description": "Lunch at cafeteria",
+    "amount": 12.50,
+    "category": "Food",
+    "date": "2026-02-02",
+    "createdAt": "2026-02-02T12:30:00.000Z",
+    "updatedAt": "2026-02-02T12:30:00.000Z"
+  },
+  {
+    "id": "rec_0003",
+    "type": "expense",
+    "description": "Chemistry textbook",
+    "amount": 89.99,
+    "category": "Books",
+    "date": "2026-02-03",
+    "createdAt": "2026-02-03T09:15:00.000Z",
+    "updatedAt": "2026-02-03T09:15:00.000Z"
+  },
+  {
+    "id": "rec_0004",
+    "type": "expense",
+    "description": "Bus pass for the month",
+    "amount": 45.00,
+    "category": "Transport",
+    "date": "2026-02-04",
+    "createdAt": "2026-02-04T07:00:00.000Z",
+    "updatedAt": "2026-02-04T07:00:00.000Z"
+  },
+  {
+    "id": "rec_0005",
+    "type": "expense",
+    "description": "Coffee with friends",
+    "amount": 8.75,
+    "category": "Entertainment",
+    "date": "2026-02-05",
+    "createdAt": "2026-02-05T16:00:00.000Z",
+    "updatedAt": "2026-02-05T16:00:00.000Z"
+  },
+  {
+    "id": "rec_0006",
+    "type": "expense",
+    "description": "University tuition fees",
+    "amount": 1200.00,
+    "category": "Fees",
+    "date": "2026-02-06",
+    "createdAt": "2026-02-06T10:00:00.000Z",
+    "updatedAt": "2026-02-06T10:00:00.000Z"
+  },
+  {
+    "id": "rec_0007",
+    "type": "income",
+    "description": "Freelance design payment",
+    "amount": 120.00,
+    "category": "Salary",
+    "date": "2026-02-07",
+    "createdAt": "2026-02-07T14:00:00.000Z",
+    "updatedAt": "2026-02-07T14:00:00.000Z"
+  },
+  {
+    "id": "rec_0008",
+    "type": "expense",
+    "description": "Groceries for the week",
+    "amount": 33.20,
+    "category": "Food",
+    "date": "2026-02-08",
+    "createdAt": "2026-02-08T11:00:00.000Z",
+    "updatedAt": "2026-02-08T11:00:00.000Z"
+  },
+  {
+    "id": "rec_0009",
+    "type": "expense",
+    "description": "Movie night tickets",
+    "amount": 15.00,
+    "category": "Entertainment",
+    "date": "2026-02-09",
+    "createdAt": "2026-02-09T19:00:00.000Z",
+    "updatedAt": "2026-02-09T19:00:00.000Z"
+  },
+  {
+    "id": "rec_0010",
+    "type": "expense",
+    "description": "Notebook and stationery",
+    "amount": 7.50,
+    "category": "Books",
+    "date": "2026-02-10",
+    "createdAt": "2026-02-10T09:30:00.000Z",
+    "updatedAt": "2026-02-10T09:30:00.000Z"
+  },
+  {
+    "id": "rec_0011",
+    "type": "income",
+    "description": "Birthday gift money received",
+    "amount": 50.00,
+    "category": "Other",
+    "date": "2026-02-11",
+    "createdAt": "2026-02-11T12:00:00.000Z",
+    "updatedAt": "2026-02-11T12:00:00.000Z"
+  },
+  {
+    "id": "rec_0012",
+    "type": "expense",
+    "description": "Moto-taxi fare to campus",
+    "amount": 2.00,
+    "category": "Transport",
+    "date": "2026-02-12",
+    "createdAt": "2026-02-12T07:45:00.000Z",
+    "updatedAt": "2026-02-12T07:45:00.000Z"
+  }
+]

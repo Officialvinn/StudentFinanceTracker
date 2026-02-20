@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ledger</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <header role="banner">
+    <div class="brand">
+      <img src="assets/logo-placeholder.png" alt="Ledger Logo" class="logo" onerror="this.style.display='none'">
+      <div class="logo-fallback" aria-hidden="true">L</div>
+      <span class="brand-name">Ledger</span>
+    </div>
+    <nav class="navbar" role="navigation" aria-label="Main navigation">
+      <a href="#" class="nav-link active" data-page="home">Home</a>
+      <a href="#" class="nav-link nav-add" data-page="add">+ Add</a>
+      <a href="#" class="nav-link" data-page="records">Records</a>
+      <a href="#" class="nav-link" data-page="about">About</a>
+      <a href="#" class="nav-link" data-page="settings">Settings</a>
+    </nav>
+  </header>
+
+  <main id="main-content" role="main">
+
+    <!-- HOME PAGE -->
+    <section class="page active" id="page-home" aria-labelledby="home-heading">
+
+      <div class="month-nav" role="group" aria-label="Month navigation">
+        <button id="prevMonth" aria-label="Previous month">&#8592;</button>
+        <span class="month-label" id="monthLabel" aria-live="polite"></span>
+        <button id="nextMonth" aria-label="Next month" disabled>&#8594;</button>
+      </div>
+
+      <div id="capWarning" class="cap-warning" role="status" aria-live="polite" aria-atomic="true"></div>
+
+      <div class="stat-cards" role="region" aria-label="Financial summary">
+        <div class="card">
+          <div class="card-label">Total Income</div>
+          <div class="card-value income" id="totalIncome" aria-live="polite">0.00</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Total Expenses</div>
+          <div class="card-value danger" id="totalExpenses" aria-live="polite">0.00</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Balance</div>
+          <div class="card-value" id="balance" aria-live="polite">0.00</div>
+        </div>
+        <div class="card">
+          <div class="card-label">Saving Rate</div>
+          <div class="card-value" id="savingRate" aria-live="polite">0%</div>
+        </div>
+      </div>
+
+      <!-- CAP PROGRESS BAR -->
+      <div class="cap-progress-card card" id="capProgressCard" role="region" aria-label="Spending cap progress" style="display:none;">
+        <div class="cap-progress-header">
+          <span class="card-label">Monthly Spending Cap</span>
+          <span class="cap-progress-pct" id="capProgressPct">0%</span>
+        </div>
+        <div class="cap-progress-bar-track"
+             role="progressbar"
+             aria-valuenow="0"
+             aria-valuemin="0"
+             aria-valuemax="100"
+             id="capProgressTrack">
+          <div class="cap-progress-bar-fill" id="capProgressFill"></div>
+        </div>
+        <div class="cap-progress-labels">
+          <span id="capProgressSpent"></span>
+          <span id="capProgressLimit"></span>
+        </div>
+      </div>
+
+      <h2 class="section-title" id="home-heading">Overview</h2>
+      <div class="home-cta card">
+        <p>Ready to log a transaction? <a href="#" class="cta-link" data-page="add">+ Add one now</a></p>
+      </div>
+
+    </section>
+
+    <!-- ADD TRANSACTION PAGE -->
+    <section class="page" id="page-add" aria-labelledby="add-heading">
+      <h2 class="section-title" id="add-heading">Add Transaction</h2>
+      <div class="form-card" role="form" aria-labelledby="add-heading">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="txType">Type</label>
+            <select id="txType">
+              <option value="income">Income</option>
+              <option value="expense">Expense</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="txAmount">Amount</label>
+            <input type="number" id="txAmount" placeholder="0.00" min="0" step="0.01" aria-describedby="amountError">
+            <span class="error-msg" id="amountError" role="alert" aria-live="assertive"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="txDescription">Description</label>
+            <input type="text" id="txDescription" placeholder="e.g. Lunch, Salary..." aria-describedby="descError">
+            <span class="error-msg" id="descError" role="alert" aria-live="assertive"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="txCategory">Category</label>
+            <select id="txCategory">
+              <option value="Food">Food</option>
+              <option value="Books">Books</option>
+              <option value="Transport">Transport</option>
+              <option value="Entertainment">Entertainment</option>
+              <option value="Fees">Fees</option>
+              <option value="Salary">Salary</option>
+              <option value="Rent">Rent</option>
+              <option value="Monthly Stipend">Monthly Stipend</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="txDate">Date</label>
+            <input type="date" id="txDate" aria-describedby="dateError">
+            <span class="error-msg" id="dateError" role="alert" aria-live="assertive"></span>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-primary" id="addTxBtn">Add Transaction</button>
+        </div>
+
+        <div id="formStatus" role="status" aria-live="polite" class="form-status"></div>
+      </div>
+    </section>
+
+    <!-- RECORDS PAGE -->
+    <section class="page" id="page-records" aria-labelledby="records-heading">
+      <h2 class="section-title" id="records-heading">Records</h2>
+
+      <div class="chart-container" role="region" aria-label="Last 7 days spending chart">
+        <div class="chart-title">Last 7 Days Spending</div>
+        <div class="chart-bars" id="chartBars" role="img" aria-label="Bar chart of spending over last 7 days"></div>
+      </div>
+
+      <div class="search-sort-bar">
+        <div class="form-group search-group">
+          <label for="searchInput">Search Records</label>
+          <input type="text" id="searchInput" placeholder="Type a search pattern..." aria-describedby="searchError">
+          <span class="error-msg" id="searchError" role="alert" aria-live="assertive"></span>
+        </div>
+        <div class="sort-buttons" role="group" aria-label="Sort options">
+          <button class="btn btn-secondary sort-btn" data-sort="date">Date ↕</button>
+          <button class="btn btn-secondary sort-btn" data-sort="description">A↕Z</button>
+          <button class="btn btn-secondary sort-btn" data-sort="amount">Amount ↕</button>
+        </div>
+        <label class="case-toggle">
+          <input type="checkbox" id="caseToggle"> Case-sensitive
+        </label>
+      </div>
+
+      <div class="table-wrapper" role="region" aria-label="Transactions table">
+        <table id="recordsTable" aria-live="polite" aria-relevant="all">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Description</th>
+              <th scope="col">Category</th>
+              <th scope="col">Type</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="recordsBody">
+            <tr id="emptyRow">
+              <td colspan="6" class="empty-state">No transactions yet. Add one above!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ABOUT PAGE -->
+    <section class="page" id="page-about" aria-labelledby="about-heading">
+      <h2 class="section-title" id="about-heading">About Ledger</h2>
+      <div class="about-grid">
+        <div class="card about-card">
+          <div class="about-icon" aria-hidden="true">📖</div>
+          <h3>What is Ledger?</h3>
+          <p>Ledger is a simple, student-focused personal finance tracker designed to help you stay on top of your money. Track your income, monitor your expenses, and understand your spending habits — all in one place.</p>
+        </div>
+        <div class="card about-card">
+          <div class="about-icon" aria-hidden="true">⚙️</div>
+          <h3>What We Do</h3>
+          <p>We help students record and categorize their daily transactions, set monthly spending caps, visualize their finances through charts, and make smarter money decisions every single day.</p>
+        </div>
+        <div class="card about-card">
+          <div class="about-icon" aria-hidden="true">📍</div>
+          <h3>Contact Us</h3>
+          <p>Have questions or feedback? Reach out to us!</p>
+          <p>📧 <a href="mailto:a.njoroge@alustudent.com">a.njoroge@alustudent.com</a></p>
+          <p>📞 +250 795 010 711</p>
+          <p>📌 Bumbogo, Kigali, Rwanda</p>
+          <p>🕐 Mon–Fri, 8AM – 5PM</p>
+        </div>
+        <div class="card about-card">
+          <div class="about-icon" aria-hidden="true">💡</div>
+          <h3>Importance of Ledger</h3>
+          <p>Managing money as a student can be tough. Ledger helps you build healthy financial habits early, avoid overspending, and save more — setting you up for a stable and confident financial future.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SETTINGS PAGE -->
+    <section class="page" id="page-settings" aria-labelledby="settings-heading">
+      <div class="settings-header">
+        <h2 class="section-title" id="settings-heading">Settings</h2>
+        <div class="theme-toggle" role="group" aria-label="Theme toggle">
+          <span>Light</span>
+          <label class="switch">
+            <input type="checkbox" id="themeToggle" aria-label="Toggle dark mode">
+            <span class="slider"></span>
+          </label>
+          <span>Dark</span>
+        </div>
+      </div>
+
+      <div class="form-card">
+        <h3 class="sub-title">Monthly Cap</h3>
+        <div class="form-group">
+          <label for="capInput">Spending Cap Monthly</label>
+          <input type="number" id="capInput" placeholder="Enter monthly cap..." aria-describedby="capError">
+          <span class="error-msg" id="capError" role="alert" aria-live="assertive"></span>
+        </div>
+        <button class="btn btn-primary" id="saveCap">Save Cap</button>
+        <div id="capSaveStatus" role="status" aria-live="polite" class="form-status"></div>
+      </div>
+
+      <div class="form-card">
+        <h3 class="sub-title">Currency</h3>
+        <div class="form-group">
+          <label for="currencySelect">Base Currency</label>
+          <select id="currencySelect">
+            <option value="USD">USD</option>
+            <option value="KSH">KSH</option>
+            <option value="RWF">RWF</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="kshRate">KSH Rate (relative to USD)</label>
+          <input type="number" id="kshRate" step="0.01" placeholder="e.g. 130">
+        </div>
+        <div class="form-group">
+          <label for="rwfRate">RWF Rate (relative to USD)</label>
+          <input type="number" id="rwfRate" step="0.01" placeholder="e.g. 1300">
+        </div>
+        <button class="btn btn-primary" id="saveRates">Save Rates</button>
+        <div id="ratesSaveStatus" role="status" aria-live="polite" class="form-status"></div>
+      </div>
+
+      <div class="form-card">
+        <h3 class="sub-title">Import / Export</h3>
+        <div class="import-export-btns">
+          <button class="btn btn-secondary" id="exportBtn">Export JSON</button>
+          <label class="btn btn-secondary" for="importFile">Import JSON</label>
+          <input type="file" id="importFile" accept=".json" aria-label="Import JSON file">
+        </div>
+        <div id="importStatus" role="status" aria-live="polite" class="form-status"></div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer role="contentinfo">
+    <p>&copy; 2026 Ledger. All rights reserved. | Kigali, Rwanda
+    <a href="https://github.com/Officialvinn" target="_blank">MyGithub</a> · 
+    </p>
+  </footer>
+
+  <script type="module" src="scripts/app.js"></script>
+
+</body>
+</html>
